@@ -25,10 +25,10 @@ static char* GLOWVIEW_KEY = "GLOWVIEW";
 }
 
 - (void)startGlowingWithColor:(UIColor *)color intensity:(CGFloat)intensity {
-    [self startGlowingWithColor:color fromIntensity:0.1 toIntensity:intensity repeat:YES];
+    [self startGlowingWithColor:color fromIntensity:0.1 toIntensity:intensity repeat:YES duration:1.0];
 }
 
-- (void) startGlowingWithColor:(UIColor*)color fromIntensity:(CGFloat)fromIntensity toIntensity:(CGFloat)toIntensity repeat:(BOOL)repeat {
+- (void) startGlowingWithColor:(UIColor*)color fromIntensity:(CGFloat)fromIntensity toIntensity:(CGFloat)toIntensity repeat:(BOOL)repeat duration:(CGFloat)duration {
     
     // If we're already glowing, don't bother
     if ([self glowView])
@@ -72,7 +72,7 @@ static char* GLOWVIEW_KEY = "GLOWVIEW";
     animation.fromValue = @(fromIntensity);
     animation.toValue = @(toIntensity);
     animation.repeatCount = repeat ? HUGE_VAL : 0;
-    animation.duration = 1.0;
+    animation.duration = duration;
     animation.autoreverses = YES;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     
@@ -83,7 +83,7 @@ static char* GLOWVIEW_KEY = "GLOWVIEW";
 }
 
 - (void) glowOnceAtLocation:(CGPoint)point inView:(UIView*)view {
-    [self startGlowingWithColor:[UIColor whiteColor] fromIntensity:0 toIntensity:0.6 repeat:NO];
+    [self startGlowingWithColor:[UIColor whiteColor] fromIntensity:0 toIntensity:0.6 repeat:NO duration:1.0];
     
     [self glowView].center = point;
     [view addSubview:[self glowView]];
